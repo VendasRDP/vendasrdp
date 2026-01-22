@@ -6,9 +6,9 @@
     <title>VENDAS RDP | Loja de Robux</title>
     <style>
         :root { --primary: #00e5ff; --dark: #0a0a0a; --card: #151515; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--dark); color: white; margin: 0; padding-bottom: 120px; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--dark); color: white; margin: 0; padding-bottom: 80px; }
         
-        header { padding: 40px; text-align: center; background: #000; border-bottom: 2px solid var(--primary); }
+        header { padding: 40px; text-align: center; background: #000; border-bottom: 3px solid var(--primary); }
         .logo { font-size: 2.5rem; font-weight: 900; color: var(--primary); text-transform: uppercase; margin: 0; }
 
         .container { max-width: 1000px; margin: 20px auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
@@ -19,18 +19,28 @@
 
         .btn-add { background: var(--primary); color: black; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; }
 
-        /* CARRINHO */
-        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #111; border-top: 2px solid var(--primary); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; z-index: 100; }
-        .btn-finalizar { background: var(--primary); color: black; border: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        
-        #cart-total { font-size: 1.5rem; color: var(--primary); }
+        /* ÍCONE DO CARRINHO (CANTO ESQUERDO) */
+        .cart-icon-float { position: fixed; bottom: 20px; left: 20px; background: var(--primary); color: black; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; cursor: pointer; z-index: 1000; box-shadow: 0 0 15px var(--primary); }
+        .cart-count-badge { position: absolute; top: 0; right: 0; background: red; color: white; font-size: 12px; padding: 4px 8px; border-radius: 50%; font-weight: bold; }
+
+        /* PAINEL DO CARRINHO (MODAL) */
+        #cart-panel { position: fixed; top: 0; left: -350px; width: 300px; height: 100%; background: #111; box-shadow: 5px 0 15px rgba(0,0,0,0.5); transition: 0.3s; z-index: 1001; padding: 20px; display: flex; flex-direction: column; }
+        #cart-panel.active { left: 0; }
+        .close-cart { align-self: flex-end; cursor: pointer; font-size: 20px; color: var(--primary); }
+
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #222; }
+        .btn-remove { background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 12px; }
+
+        .cart-footer { margin-top: auto; padding-top: 20px; }
+        .total-price { font-size: 1.5rem; color: var(--primary); margin-bottom: 20px; display: block; }
+        .btn-checkout { background: #25d366; color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; width: 100%; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <header>
     <h1 class="logo">VENDAS RDP</h1>
-    <p>Loja Especializada em Robux - Atendimento Online</p>
+    <p>Loja Especializada em Robux</p>
 </header>
 
 <div class="container">
@@ -39,19 +49,16 @@
         <span class="price">R$ 8,00</span>
         <button class="btn-add" onclick="addToCart('400 Robux', 8.00)">Adicionar ao Carrinho</button>
     </div>
-
     <div class="card">
         <h3>💎 800 Robux</h3>
-        <span class="price">R$ 19,99</span>
-        <button class="btn-add" onclick="addToCart('800 Robux', 19.99)">Adicionar ao Carrinho</button>
+        <span class="price">R$ 15,00</span>
+        <button class="btn-add" onclick="addToCart('800 Robux', 15.00)">Adicionar ao Carrinho</button>
     </div>
-
     <div class="card">
         <h3>💎 1700 Robux</h3>
-        <span class="price">R$ 36,99</span>
-        <button class="btn-add" onclick="addToCart('1700 Robux', 36.99)">Adicionar ao Carrinho</button>
+        <span class="price">R$ 32,00</span>
+        <button class="btn-add" onclick="addToCart('1700 Robux', 32.00)">Adicionar ao Carrinho</button>
     </div>
-
     <div class="card">
         <h3>💎 2800 Robux</h3>
         <span class="price">R$ 54,99</span>
@@ -59,39 +66,76 @@
     </div>
 </div>
 
-<div class="cart-bar">
-    <div>
-        Total: <b>R$ <span id="cart-total">0,00</span></b>
-        <div id="cart-count" style="font-size: 0.8rem; color: #888;">0 itens no carrinho</div>
+<div class="cart-icon-float" onclick="toggleCart()">
+    🛒 <span class="cart-count-badge" id="badge-count">0</span>
+</div>
+
+<div id="cart-panel">
+    <span class="close-cart" onclick="toggleCart()">✖ Fechar</span>
+    <h2>Seu Carrinho</h2>
+    <div id="cart-items-list" style="flex-grow: 1; overflow-y: auto;">
+        </div>
+    <div class="cart-footer">
+        <span>Total:</span>
+        <span class="total-price" id="total-price">R$ 0,00</span>
+        <button class="btn-checkout" onclick="finishOrder()">🛒 FINALIZAR NO CHAT</button>
     </div>
-    <button class="btn-finalizar" onclick="finishOrder()">🛒 FINALIZAR PEDIDO</button>
 </div>
 
 <script>
     let cart = [];
     let total = 0;
 
+    function toggleCart() {
+        document.getElementById('cart-panel').classList.toggle('active');
+    }
+
     function addToCart(name, price) {
-        cart.push(name);
-        total += price;
-        document.getElementById('cart-total').innerText = total.toFixed(2).replace('.', ',');
-        document.getElementById('cart-count').innerText = cart.length + " item(s) no carrinho";
+        cart.push({ name, price });
+        renderCart();
+        // Abre o carrinho automaticamente para mostrar que adicionou
+        if(!document.getElementById('cart-panel').classList.contains('active')) toggleCart();
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        renderCart();
+    }
+
+    function renderCart() {
+        const list = document.getElementById('cart-items-list');
+        const badge = document.getElementById('badge-count');
+        const totalDisplay = document.getElementById('total-price');
+        
+        list.innerHTML = "";
+        total = 0;
+
+        cart.forEach((item, index) => {
+            total += item.price;
+            list.innerHTML += `
+                <div class="cart-item">
+                    <span>${item.name}</span>
+                    <span>R$ ${item.price.toFixed(2)}</span>
+                    <button class="btn-remove" onclick="removeFromCart(${index})">X</button>
+                </div>
+            `;
+        });
+
+        badge.innerText = cart.length;
+        totalDisplay.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
     }
 
     function finishOrder() {
-        if(cart.length === 0) return alert("Adicione itens ao carrinho primeiro!");
+        if(cart.length === 0) return alert("Carrinho vazio!");
         
-        const resumo = "NOVO PEDIDO:\n" + cart.join('\n') + "\nTotal: R$ " + total.toFixed(2).replace('.', ',');
+        const nomes = cart.map(i => i.name).join(', ');
+        const resumo = `Olá! Quero comprar: ${nomes}. Total: R$ ${total.toFixed(2)}`;
         
-        alert("Obrigado! O chat de suporte será aberto agora para você enviar o seu pedido e combinarmos o pagamento.");
-        
-        // Abre o Chat do Tawk.to automaticamente se estiver instalado
+        alert("O chat de suporte será aberto. Por favor, envie a lista dos itens no chat!");
+
         if (typeof Tawk_API !== 'undefined') {
             Tawk_API.maximize();
-            // Tenta enviar a mensagem para o chat
-            Tawk_API.setAttributes({
-                'Pedido': resumo
-            }, function(error){});
+            Tawk_API.sendMessage(resumo);
         }
     }
 </script>
