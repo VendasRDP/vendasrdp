@@ -3,49 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vendas RDP - Roblox</title>
+    <title>VENDAS RDP - Robux e Serviços</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0a0a0a; color: white; text-align: center; margin: 0; }
-        header { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('sua-imagem-roblox.jpg'); padding: 60px 20px; }
-        .logo { font-size: 3rem; font-weight: bold; color: #00e5ff; text-shadow: 2px 2px 10px #00e5ff; }
-        .container { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; padding: 50px; }
-        .card { background: #1a1a1a; border: 2px solid #333; border-radius: 15px; padding: 20px; width: 250px; transition: 0.3s; }
-        .card:hover { border-color: #00e5ff; transform: scale(1.05); }
-        .price { font-size: 1.5rem; color: #00e5ff; margin: 15px 0; }
-        .btn { background-color: #00e5ff; color: black; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold; }
-        footer { padding: 30px; font-size: 0.8rem; color: #666; }
+        :root {
+            --primary-color: #00e5ff; /* Azul Neon */
+            --bg-dark: #0a0a0a;
+            --card-bg: #151515;
+            --whatsapp-green: #25d366;
+        }
+
+        body {
+            font-family: 'Arial Black', Gadget, sans-serif;
+            background-color: var(--bg-dark);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Topo do Site */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images8.alphacoders.com/132/1324329.png');
+            background-size: cover;
+            background-position: center;
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--primary-color);
+        }
+
+        .brand-name {
+            font-size: 4rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            margin: 0;
+            text-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-top: 10px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        /* Grade de Produtos */
+        .grid-vendas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 2px solid #222;
+            transition: 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .rbx-title {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .price-container {
+            margin-bottom: 25px;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .new-price {
+            font-size: 2.5rem;
+            color: #fff;
+            display: block;
+        }
+
+        .btn-contato {
+            display: block;
+            background-color: var(--whatsapp-green);
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .btn-contato:hover {
+            background-color: #128c7e;
+            transform: scale(1.05);
+        }
+
+        .info-footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #444;
+            font-family: sans-serif;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">VENDAS RDP</div>
-    <p>As melhores máquinas virtuais para farmar no Roblox 24/7</p>
+    <h1 class="brand-name">VENDAS RDP</h1>
+    <p class="subtitle">Robux Barato & Entrega Rápida - Atendimento via WhatsApp</p>
 </header>
 
 <div class="container">
-    <div class="card">
-        <h3>Plano Básico</h3>
-        <p>2GB RAM / 1 vCPU</p>
-        <div class="price">R$ 29,90/mês</div>
-        <a href="#" class="btn">Comprar Agora</a>
-    </div>
-    <div class="card">
-        <h3>Plano Pro</h3>
-        <p>4GB RAM / 2 vCPU</p>
-        <div class="price">R$ 49,90/mês</div>
-        <a href="#" class="btn">Comprar Agora</a>
-    </div>
-    <div class="card">
-        <h3>Plano Ultra</h3>
-        <p>8GB RAM / 4 vCPU</p>
-        <div class="price">R$ 89,90/mês</div>
-        <a href="#" class="btn">Comprar Agora</a>
+    <div class="grid-vendas">
+        <div class="card">
+            <span class="rbx-title">💎 400 Robux</span>
+            <div class="price-container">
+                <span class="old-price">R$ 15,00</span>
+                <span class="new-price">R$ 8,00</span>
+            </div>
+            <a href="https://wa.me/5511999999999?text=Olá+Vendas+RDP,+quero+comprar+400+Robux" class="btn-contato">COMPRAR AGORA</a>
+        </div>
+
+        <div class="card" style="border-color: var(--primary-color);">
+            <span class="rbx-title">💎 800 Robux</span>
+            <div class="price-container">
+                <span class="old-price">R$ 30,00</span>
+                <span class="new-price">R$ 15,00</span>
+            </div>
+            <a href="https://wa.me/5511999999999?text=Olá+Vendas+RDP,+quero+comprar+800+Robux" class="btn-contato">COMPRAR AGORA</a>
+        </div>
+
+        <div class="card">
+            <span class="rbx-title">💎 1700 Robux</span>
+            <div class="price-container">
+                <span class="old-price">R$ 60,00</span>
+                <span class="new-price">R$ 32,00</span>
+            </div>
+            <a href="https://wa.me/5511999999999?text=Olá+Vendas+RDP,+quero+comprar+1700+Robux" class="btn-contato">COMPRAR AGORA</a>
+        </div>
     </div>
 </div>
 
-<footer>
-    <p>&copy; 2024 Vendas RDP - Todos os direitos reservados.</p>
+<footer class="info-footer">
+    <p>Site oficial VENDAS RDP - Métodos de pagamento: Pix e Cartão.</p>
 </footer>
 
 </body>
