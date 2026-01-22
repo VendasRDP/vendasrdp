@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VENDAS RDP | Loja Oficial</title>
+    <title>VENDAS RDP | Loja de Robux</title>
     <style>
         :root { --primary: #00e5ff; --dark: #0a0a0a; --card: #151515; }
         body { font-family: 'Segoe UI', sans-serif; background-color: var(--dark); color: white; margin: 0; padding-bottom: 120px; }
@@ -30,30 +30,30 @@
 
 <header>
     <h1 class="logo">VENDAS RDP</h1>
-    <p>Adicione os itens e clique em Finalizar para falar com o Suporte</p>
+    <p>Loja Especializada em Robux - Atendimento Online</p>
 </header>
 
 <div class="container">
     <div class="card">
-        <h3>400 Robux</h3>
+        <h3>💎 400 Robux</h3>
         <span class="price">R$ 8,00</span>
         <button class="btn-add" onclick="addToCart('400 Robux', 8.00)">Adicionar ao Carrinho</button>
     </div>
 
     <div class="card">
-        <h3>800 Robux</h3>
+        <h3>💎 800 Robux</h3>
         <span class="price">R$ 19,99</span>
         <button class="btn-add" onclick="addToCart('800 Robux', 19.99)">Adicionar ao Carrinho</button>
     </div>
 
     <div class="card">
-        <h3>1700 Robux</h3>
+        <h3>💎 1700 Robux</h3>
         <span class="price">R$ 36,99</span>
         <button class="btn-add" onclick="addToCart('1700 Robux', 36.99)">Adicionar ao Carrinho</button>
     </div>
 
     <div class="card">
-        <h3>2800 Robux</h3>
+        <h3>💎 2800 Robux</h3>
         <span class="price">R$ 54,99</span>
         <button class="btn-add" onclick="addToCart('2800 Robux', 54.99)">Adicionar ao Carrinho</button>
     </div>
@@ -62,9 +62,9 @@
 <div class="cart-bar">
     <div>
         Total: <b>R$ <span id="cart-total">0,00</span></b>
-        <div id="cart-count" style="font-size: 0.8rem; color: #888;">0 itens</div>
+        <div id="cart-count" style="font-size: 0.8rem; color: #888;">0 itens no carrinho</div>
     </div>
-    <button class="btn-finalizar" onclick="finishOrder()">🛒 FINALIZAR E PAGAR</button>
+    <button class="btn-finalizar" onclick="finishOrder()">🛒 FINALIZAR PEDIDO</button>
 </div>
 
 <script>
@@ -74,27 +74,27 @@
     function addToCart(name, price) {
         cart.push(name);
         total += price;
-        document.getElementById('cart-total').innerText = total.toFixed(2);
+        document.getElementById('cart-total').innerText = total.toFixed(2).replace('.', ',');
         document.getElementById('cart-count').innerText = cart.length + " item(s) no carrinho";
     }
 
     function finishOrder() {
-        if(cart.length === 0) return alert("Seu carrinho está vazio!");
+        if(cart.length === 0) return alert("Adicione itens ao carrinho primeiro!");
         
-        // Texto que será enviado para você no chat
-        const resumo = "PEDIDO NOVO:\n" + cart.join(', ') + "\nTotal: R$ " + total.toFixed(2);
+        const resumo = "NOVO PEDIDO:\n" + cart.join('\n') + "\nTotal: R$ " + total.toFixed(2).replace('.', ',');
         
-        alert("Seu pedido foi processado! O chat de suporte será aberto agora para finalizarmos o pagamento.");
+        alert("Obrigado! O chat de suporte será aberto agora para você enviar o seu pedido e combinarmos o pagamento.");
         
-        // Comando para abrir o chat do Tawk.to automaticamente
+        // Abre o Chat do Tawk.to automaticamente se estiver instalado
         if (typeof Tawk_API !== 'undefined') {
-            Tawk_API.maximize(); // Abre a janela do chat
-            Tawk_API.sendMessage(resumo); // Tenta enviar o resumo (algumas versões do tawk bloqueiam envio auto, mas ele já abre pro cliente colar ou falar)
+            Tawk_API.maximize();
+            // Tenta enviar a mensagem para o chat
+            Tawk_API.setAttributes({
+                'Pedido': resumo
+            }, function(error){});
         }
     }
 </script>
 
 </body>
 </html>
-
-
